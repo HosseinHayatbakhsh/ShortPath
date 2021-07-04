@@ -11,24 +11,35 @@ namespace ShortestPath
         static void Main(string[] args)
         {
             ShortestPathService shortestPathService = new ShortestPathService();
+            //string mapData = null;
+            //string mapData = "";
+            //string mapData = "PFPW..";
+            //string mapData = "..F;PW.;..";
+
+            //string mapData = "PF";
             //string mapData = "..F;PW.;...";
-            string mapData = "W.W..;P.WF.;.W.W.;.....;.WW.F";
+            //string mapData = "W.W..;P.WF.;.W.W.;.....;.WW.F";
+            //string mapData = "W.W..;P..F.;.W.W.;.....;.WW.F";
+            //string mapData = "W.W..;...F.;.W.W.;.....;PWW.F";
+            string mapData = "W.W..;...F.;.W.W.;.....;PWWF.";
             //string mapData = "W.W..;F.WF.;.W.W.;.....;.WW.P";
             //string mapData = "W.W..;P.WF.;WWWWW;.....;.WW.F";
+            //string mapData = "W.W..;P..F.;WWWWW;.....;.WW.F";
 
             // Print out the map chart
-            Console.WriteLine("Map chart:");
-            foreach (char mapChar in mapData)
-            {
-                Console.Write(mapChar != ';' ? mapChar.ToString() + ' ' : '\n');
-            }
 
             try
             {
-                Console.WriteLine();
-                Console.WriteLine();
                 Console.WriteLine("The shortest path is:");
                 Console.WriteLine(shortestPathService.ShortestPath(mapData));
+                Console.WriteLine();
+
+                Console.WriteLine("Map chart:");
+                foreach (char mapChar in mapData)
+                {
+                    Console.Write(mapChar != ';' ? mapChar.ToString() + ' ' : '\n');
+                }
+                Console.WriteLine();
             }
             catch (Exception ex)
             {
@@ -187,7 +198,7 @@ namespace ShortestPath
             Vertex currentVertex = player;
             while (true)
             {
-                ExamineAdjacentVetices(currentVertex, vertexData);
+                ExamineAdjacentVertices(currentVertex, vertexData);
 
                 int count = (from Vertex vertex in vertexData
                              where vertex.Status == VertexStatus.Temporary && vertex.PathLength != Infinity
@@ -200,7 +211,7 @@ namespace ShortestPath
             }
         }
 
-        private void ExamineAdjacentVetices(Vertex currentVertex, Vertex[,] vertexData)
+        private void ExamineAdjacentVertices(Vertex currentVertex, Vertex[,] vertexData)
         {
             int rowLength = vertexData.GetLength(0);
             int columnLength = vertexData.GetLength(1);
